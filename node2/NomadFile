@@ -1,0 +1,10 @@
+{
+	"version": "1.0",
+	"template": "Ubuntu-16.04",
+	"user": "primary",
+	"password": "something",
+	"provision-mode": "iso",
+	"mounts": [
+	    { "source": "../code", "target": "code", "mode": "input" }
+	]
+}

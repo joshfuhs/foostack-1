@@ -1,0 +1,12 @@
+[Unit]
+
+Description = Do some prep for devstack@c-vol.service so that it can reboot successfully.
+
+[Service]
+
+Type = oneshot
+ExecStart = /usr/lib/foostack/prep-c-vol.sh
+
+[Install]
+
+WantedBy = devstack@c-vol.service
