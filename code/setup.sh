@@ -44,6 +44,7 @@ done
 
 sudo systemctl enable foostack@prep-c-vol.service
 sudo systemctl enable foostack@run-state-recovery.service
+sudo systemctl start foostack@run-state-recovery.service
 
 # @todo: Set up shutdown process that migrates all instances off the host
 #   before shutdown if the entire cluster isn't in a shutdown state.
