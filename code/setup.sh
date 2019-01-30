@@ -16,20 +16,10 @@ sudo useradd -s /bin/bash -d $STACK_HOME -m stack
 echo "stack ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/stack
 
 sudo -u stack -H sh -c "cd && git clone https://git.openstack.org/openstack-dev/devstack"
+# @todo: I suspect auto-update processes are causing things to break.
+#   It grabs the dpkg lock and doesn't let go until it's done.
 sudo -u stack -H cp $SCRIPTDIR/local.conf $STACK_HOME/devstack
 sudo -u stack -H sh -c 'cd $HOME/devstack && ./stack.sh'
-
-# For recovery of the devstack after reboot, use this.
-# Note: recover-devstack currently points to $SCRIPTDIR
-# @todo: This should be removed.
-# @todo: Otherwise, find a way to make this a standard LSB service so that
-#   update scripts won't puke all over the place.
-#sudo cp $SCRIPTDIR/recover-openstack /etc/init.d
-#sudo chmod +x /etc/init.d/recover-openstack
-#(cd /etc/rc2.d && sudo ln -s ../init.d/recover-openstack S07recover-openstack)
-#(cd /etc/rc3.d && sudo ln -s ../init.d/recover-openstack S07recover-openstack)
-#(cd /etc/rc4.d && sudo ln -s ../init.d/recover-openstack S07recover-openstack)
-#(cd /etc/rc5.d && sudo ln -s ../init.d/recover-openstack S07recover-openstack)
 
 # Place for recording the state of all nodes on shutdown.
 sudo mkdir /var/lib/$PROJECT_NAME
