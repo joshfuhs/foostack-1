@@ -1,7 +1,11 @@
 [Unit]
 
 Description = Store and restore instance run state on shut down and reboot.
-After = sysinit.target cloud-init.target
+After = multi-user.target
+After = libvirt-guests.service
+Requires = multi-user.target
+Wants = libvirt-guests.service
+
 
 [Service]
 
@@ -9,6 +13,7 @@ Type = oneshot
 ExecStart = /usr/lib/foostack/restore-run-state.sh
 ExecStop = /usr/lib/foostack/store-run-state.sh
 RemainAfterExit = true
+TimeoutSec = 180
 
 [Install]
 
