@@ -1,0 +1,13 @@
+
+# TODO: IPv6
+
+# Devstack public IPv4 interface
+auto br-ex
+iface br-ex inet static
+    address 172.24.4.1
+	netmask 255.255.255.0
+
+# Devstack public IPv6 interface
+iface br-ex inet6 static
+    address 2001:db8::2
+	netmask 64
