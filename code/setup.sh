@@ -36,8 +36,13 @@ sudo systemctl enable foostack@prep-c-vol.service
 sudo systemctl enable foostack@run-state-recovery.service
 sudo systemctl start foostack@run-state-recovery.service
 
-# Make sure that the 
-sudo cp $SCRIPTDIR/conf/ifcfg-br-ex /etc/network/interfaces.d
+# Make sure that the public network interface gets restored on reboot.
+if [ -d /etc/netplan ]; then
+	sudo cp $SCRIPTDIR/conf/netplan-br-ex.yaml /etc/netplan
+	sudo netplan apply
+else
+	sudo cp $SCRIPTDIR/conf/ifcfg-br-ex /etc/network/interfaces.d
+fi
 
 # @todo: Set up shutdown process that migrates all instances off the host
 #   before shutdown if the entire cluster isn't in a shutdown state.
