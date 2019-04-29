@@ -9,6 +9,9 @@ PROJECT_NAME=foostack
 SCRIPTDIR=$(realpath $(dirname $0))
 STACK_HOME=/opt/stack
 
+# Needed at least for Ubuntu 16.04
+sudo apt-get install bridge-utils
+
 # From: https://docs.openstack.org/devstack/latest/
 
 sudo useradd -s /bin/bash -d $STACK_HOME -m stack
